@@ -1,0 +1,502 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Bold;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww20920\viewh19580\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 *** SCALETTA PER SEMINARIO LIVEBINDINGS ***\
+\
+- Introduzione, LiveBindings \'e8 un brutto anatroccolo oppure un cigno incompreso?\
+	- E\'92 un qualcosa che permette di collegare/modificare/associare il valore di una propriet\'e0 di un qualunque oggetto al valore di un\'92altra propriet\'e0 di un qualunque altro oggetto (componenti, controlli o normali oggetti custom)\
+	- E\'92 disponibile sia in FMX che VCL\
+	- Il concetto di associazione e di interazione  tra oggetti non \'e8 nuova, si pensi ad esempio a quanto avviene con i componenti DBAware e i TDataSource, oppure si pensi anche al meccanismo di owning che c\'92\'e8 tra i componenti (derivati da TComponent) che garantisce che un oggetto contenitore si faccia carico dell\'92eliminazione di tutti gli eventuali oggetti contenuti automaticamente durante la sua distruzione (notifica di creazione dell\'92oggetto contenuto al contenitore e il contrario alla sua distruzione ecc).\
+	- Per\'f2 in questi ultimi casi si tratta di classi progettate specificamente per collaborare tra loro in modo rigido, implementano propriet\'e0, metodi e comportamenti precedentemente concordati e le possibilit\'e0 offerte sono disponibili solo per un numero limitato di classi.\
+	- A differenza di quanto \'e8 possibile con i TDataSource e i componenti DBAware con i quali era necessario avere dei componenti specifici, con LiveBindings si pu\'f2 collegare qualsiasi cosa. Non si \'e8 limitati a un limitato numero di componenti o oggetti in genere che implementano una certa funzionalit\'e0 ma si possono mettere in relazione tra loro classi che non sono state minimamente progettate per collaborare tra loro. Questo \'e8 un punto enorme a favore di LiveBindings.\
+	- Il qualcosa che ci permette questo nel gergo utilizzato in LiveBindings, \'e8 chiamata \'93Espressione Relazionale\'94\
+	- Cosa mi permette di fare?\
+	- E\'92 customizzabile? \
+	- Quanto \'e8 customizzabile?\
+	- Come fare quindi per estenderlo e adattarlo alle mie esigenze\
+	- Le parole chiave sono: 
+\f1\b Expressions
+\f0\b0 , 
+\f1\b Scopes
+\f0\b0 , 
+\f1\b OutputConverters
+\f0\b0 . \
+	- NB: Ci stiamo infilando in un vespaio (o ginepraio) / Ci stiamo cacciando nei guai!!!\
+\
+\
+\
+\
+\
+\
+\
+- Cos\'92\'e8 realmente LiveBindings\
+	- L\'92Expression Engine\
+		- In quale unit \'e8 definito\
+		- Cosa accetta come input\
+			- Espressioni Relazionali, chiamate BindingExpressions\
+			- In pratica \'e8 una normale stringa contenente un\'92espressione da valutare\
+		- Cosa restituisce come risultato (IValue)\
+		- Esempio minimale (senza nemmeno l\'92uso di una TBindingExpression) ???\
+	- TBindingExpression\
+		- E\'92 una classe astratta ed \'e8 la base per usare normalmente l\'92ExpressionEngine\
+		- La classe pi\'f9 a basso livello che la implementa \'e8 la TBindingExpressionDefault\
+		- Di nuovo lo stesso esempio minimale di prima ma fatto con la TBindingExpression (solo matematica con operatori di base +-*/)\
+		- Esempio con una parte literal pi\'f9 una parte con una conversione (es: \'93Solo le ore: \'93 + ToStr(2)) e vedere che fallisce\
+		- Definizione dell\'92espressione, compilazione, valutazione\
+		- Introduzione di IScope\
+		- Il \'93Compile\'94 di un\'92espressione pu\'f2 ricevere anche gli IScope necessari per la valutazione nei suoi 3 parametri\
+			- Il primo parametro del metodo Compile pi\'f9 verboso (ne esistono diversi overload) pu\'f2 ricevere un array di TComponent e rendere quindi visibili all\'92engine i componenti che sono sulla nostra form (Buttons, Edits, ComboBox, Label ecc. ecc.). Il discendente di TComponent sar\'e0 accessibile all\'92interno dell\'92espressione con il nome specificato nella sua propriet\'e0 \'93Name\'94\
+			- Il secondo parametro pu\'f2 ricevere un array di Associations (TBindingAssociation) che altro non sono che la versione pi\'f9 generica del primo parametro ma che ci permettere di rendere visibili qualunque nostro oggetto nel contesto dell\'92espressione, in pratica associa un oggetto a un nome attraverso il quale l\'92oggetto stesso potr\'f2 essere visibile all\'92interno dell\'92espressione, quindi si potranno invocare i suoi metodi, accedere alle propriet\'e0 ecc.\
+			-  Il terzo parametro invece \'e8 ancora pi\'f9 generico pu\'f2 contenere un array di IScope in generale, ogni IScope pu\'f2 dare visibilit\'e0 a qualunque cosa (Oggetti, Metodi, Variabili, Costanti, Convertitori), in pratica qualunque cosa possa essere wrappata in un IScope. \
+			- In pratica quello che l\'92expression Engine (e quindi l\'92espressione) pu\'f2 vedere sono gli IScope, null\'92altro.\
+			- Quindi il grado di flessibilit\'e0 e di customizzazione \'e8 molto molto elevato \
+		- Aggiungere Metodi di TFunctions agli scope dell\'92espressione\
+		- Aggiungere variabili/costanti agli scope\
+		- Aggiungere un TComponent agli scope\
+		- Aggiungere una associazione agli scope\
+		- Aggiungere metodi custom agli scope (TBindingMethodsFactory ecc.)\
+		- Qui potrei fare un esempio (o pi\'f9 esempi separati) per far vedere l\'92aggiunta di diversi IScope\
+		- Gli IScope sono gerarchici, ne viene fornito sempre uno solo all\'92espressione ma questo ne pu\'f2 contenere tanti altri innestati dentro se stesso in una gerarchia e con un meccanismo di Lookup\
+		- TDictionaryScope\
+\
+\
+\
+\
+\
+\
+- 
+\f1\b I veri LiveBindings
+\f0\b0 \
+\
+	- Esempio FMX con la Label ruotata, la TrackBar collegata e una TBindExpression (1\'b0 step)\
+		- TBindingList_ mantiene su una form/frame una collezione di BindExpressions e fa anche altre cosette\
+		- TBindExpression\
+			- E\'92 la classe pi\'f9 semplice delle classi LiveBindings\
+			- Ha un ControlComponent\
+			- Ha un source composent\
+			- Ha una component expression (propriet\'e0 a cui assegnare il valore)\
+			- Ha una source expression (questa \'e8 una vera espressione che determina il valore che verr\'e0 assegnato)\
+			- In pratica incapsula una BindingExpression e crea gli scope necessari a var \'93vedere\'94 gli oggetti interessati, valuta l\'92espressione e assegna il risultato al ControlComponent (SLIDE APPOSITA CON RAPPRESENTAZIONE VISUALE DI UNA BIND EXPRESSION) \
+		- Lanciare l\'92esempio e verificare che \'93NON VA\'94 (quindi non \'e8 proprio Live)\
+		- Aggiungere il Notify e riprovare, ORA FUNZIONA\
+		- Quindi vuoi dire che per farlo funzionare devo inserire il Notify un p\'f2 ovunque?\
+		- Allora non potevo usare un semplice EventHandler???\
+\
+	- Esempio step 2: aggiungere una ProgressBar e bendarla sempre con una TBindEpression\
+		- Non ho dovuto aggiungere un ulteriore EventHandler ne modificare quello esistente\
+\
+	- Esempio step 3: aggiungere una EditBox e bendarla sempre con una TBindExpression (TrackBar -> EditBox)\
+		 - Funzione ma un numeraccio, aggiungere il \'93Round\'94 e riprovare\
+\
+	- Esempio step 4: brindare sempre la stessa EditBox con un\'92altra TBindExpression ma in modo inverso (EditBox -> TrackBar) in modo da rendere bidirezionale\
+		- Non funziona, aggiungere l\'92evento OnChange facendo per\'f2 notare che riutilizzo sempre lo stesso\
+		- Ora funziona \
+			\
+	- Esempio step 5: eliminare gli ultimi 2 BindExpression e sostituirli con un unico TBindExprItems\
+		- Impostare sia l\'92espressione Source->Control che la Control->Source (Format)\
+		- Far notare quindi che questo tipo di LiveBinding pu\'f2 contenere pi\'f9 di una BindingExpression (normalmente da 1 a 3)\
+		\
+	- Esempio step 6: Aggiungere anche l\'92espressione \'93Clear\'94 alla precedente TBindExprItems\
+		- Aggiungere un CheckBox e bendarlo in modo che abiliti/disabiliti la BindExprItems con una normale BindExpression\
+		- Non funziona, aggiungere l\'92OnChange anche al CheckBox sempre facendo notare che riutilizziamo sempre lo stesso\
+		- Ora funziona (attento a rimettere prima la TrackBar sempre = 0)\
+\
+	- Esempio step 7: Aggiungere all\'92Edit una expression tipo \'91Rotation: \'91  + ToStr(Value) + \'91\'b0\'92\
+		- Non funziona pi\'f9 il Binding bidirezionale\
+		- Questo succede perch\'e8 avendo aggiunto una parte \'91letterale\'92 all\'92espressione e avendo, tra l\'92altro, fatto in modo che il risultato sia una stringa non convertibile in intero il giochino si rompe\
+		- Aggiungere il CustomMethod \'93DigitsOnly\'94\
+		- Modificare l\'92espressione Control->Source in modo che usi la funzione \'93DigitsOnly\'94\
+		- Ora funziona perch\'e8 tale funzione ritorna un valore compatibile\
+\
+	- Esempio step 8:\
+		- Aggiungere un secondo EditBox (copiandolo dal primo) e bendarlo al primo con una sempre BindExpression impostata come bidirezionale\
+		- Funziona perch\'e9 le due propriet\'e0 sono compatibili, non ci sono parti letterali nell\'92espressione ecc. Inoltre c\'92\'e8 gi\'e0 il Notify nell\'92OnChange (riutilizzato ancora una volta)\
+		- Far vedere che  disabilitando la TBindExprItems il Binding tra i due Edit comunque continua a funzionare\
+		- Far vedere che aggiungendo una parte \'91letterale\'92 all\'92espressione poi non funziona pi\'f9\
+		- Anche aggiungendo il richiamo a un metodo poi non funziona pi\'f9 (come bidirezionale non funziona pi\'f9)\
+\
+\
+\
+\
+\
+- 
+\f1\b ListLiveBindings
+\f0\b0 :\
+	- Con le BindExpressions si pu\'f2 fare molto ma ora le cose diventano pi\'f9 interessanti\
+	- Le 
+\f1\b ListLiveBindings
+\f0\b0  hanno diverse cose in comune con le 
+\f1\b BindExprItems, 
+\f0\b0 in particolare anch\'92esse hanno la possibilit\'e0 di poter definire una collezione di diverse espressioni per poter assegnare diversi valori a diverse propriet\'e0 differenti del 
+\f1\b ControlComponent, 
+\f0\b0 ad esempio entrambe hanno sia le \'93
+\f1\b Format
+\f0\b0 \'94 che le \'93
+\f1\b Clear
+\f0\b0 \'94 expression collections
+\f1\b \
+
+\f0\b0 	- Rispetto alle BindExprItems vanno un p\'f2 oltre perch\'e9 sono progettate per lavorare con le Liste (come si intuisce anche dal loro nome)\
+	- E le liste sono alla base di componenti quali: ListBox, ComboBox, ListView e StringGrid (lista di liste di stringhe).\
+	- Sono 
+\f1\b \'93a senso unico\'94
+\f0\b0 , da SourceComponent -> ControlComponent \'85 e basta!!!\'df\
+	- Sono 
+\f1\b Unmanaged
+\f0\b0 \
+
+\f1\b 	
+\f0\b0 - C\'92\'e8 anche un\'92altra grande differenza rispetto alle BindExtrItems: le ListLiveBindings usano i 
+\f1\b BindScope
+\f0\b0 (deprecated)/
+\f1\b BindSource
+\f0\b0  (PrototypeBindSource e BindSourceDB) permettendo quindi di \'93collegare\'94 oggetti basati su liste ad esempio ai 
+\f1\b DataSet
+\f0\b0  ma anche direttamente a \'93
+\f1\b EnumerableObjects
+\f0\b0 \'94 cio\'e8 a TList<T> e similari.\
+	- 
+\f1\b BindSourceDB
+\f0\b0 :\
+		- Permette di rendere \'93visibile\'94 un DataSet all\'92angine delle espressioni\
+		- In pratica incapsula un DataSet in un IScope\
+		- 
+\f1\b Per essere pi\'f9 precisi il \'93TBindSourceDB\'94 rende ogni Field del DataSet visibile nell\'92IScope del BindSourceDBStesso
+\f0\b0 \
+		- In un certo senso il suo ruolo \'e8 simile a quello del TDataSource classico\
+		- Anch\'92esso si collega ad un TDataSet (in realt\'e0 non proprio direttamente ma attraverso un TBindSource embedded) ed espone i dati del DataSet per il binding\
+	- 
+\f1\b TBindList
+\f0\b0 :\
+		- Esempio step1:\
+			- Creare un nuovo progetto 
+\f1\b VCL
+\f0\b0 \
+			- Aggiungere una 
+\f1\b TListBox
+\f0\b0 \
+			- Aggiungere 
+\f1\b TBindingList
+\f0\b0 \
+			- Aggiungere dal DataExplorer la tabella Employees con una 
+\f1\b SQLiteConnection.SQLite_Demo
+\f0\b0  (drag & drop)\
+			- Aggiungere un 
+\f1\b TBindSourceDB 
+\f0\b0 e impostare DataSet := EmployeesTable\
+			- Aggiungere una 
+\f1\b TBindList
+\f0\b0 \
+				- 
+\f1\b SourceComponent
+\f0\b0  := BindSourceDB1\
+				- 
+\f1\b ControlComponent
+\f0\b0  := ListBox1\
+			- Aggiungere una 
+\f1\b Format
+\f0\b0  
+\f1\b expression
+\f0\b0 \
+				- 
+\f1\b ControlExpression
+\f0\b0  := Text\
+				- 
+\f1\b SourceExpression
+\f0\b0  := UpperCase(FirstName.AsString + \'91 \'91 + LastName.AsString + \'91 - \'92 + EmployeeID.AsString)\
+		- Esempio step 2:\
+			- Aggiungere un 
+\f1\b TButton
+\f0\b0  (Caption := \'91Enable/Disable\'92)\
+				- 
+\f1\b OnClick
+\f0\b0  := EmployeesTable.Active := not EmployeesTable.Active\
+			- Aggiungere una 
+\f1\b Clear
+\f0\b0  Expression\
+				- 
+\f1\b ControlExpression
+\f0\b0  := Visible\
+				- 
+\f1\b SourceExpression
+\f0\b0  := False\
+			- Aggiungere una 
+\f1\b FormatControl
+\f0\b0  Expression\
+				- 
+\f1\b ControlExpression
+\f0\b0  := Visible\
+				- 
+\f1\b SourceExpression
+\f0\b0  := True\
+		- Esempio step 3:\
+			- Aggiungere un 
+\f1\b TEdit
+\f0\b0 \
+			- Aggiungere una 
+\f1\b BindExpression
+\f0\b0 \
+				- 
+\f1\b SourceComponent
+\f0\b0  := ListBox1\
+				- 
+\f1\b ControlComponent
+\f0\b0  := Edit1\
+				- 
+\f1\b ControlExpression
+\f0\b0  := Text\
+				- 
+\f1\b SourceExpression
+\f0\b0  := IfThen(ItemIndex > -1, Items.Strings[ItemIndex], 'Select an item please')\
+		- Esempio step 4:\
+			- Aggiungere una 
+\f1\b TComboBox
+\f0\b0 \
+			- Aggiungere una 
+\f1\b TBindList
+\f0\b0 \
+				- 
+\f1\b SourceComponent
+\f0\b0  := BindSourceDB1\
+				- 
+\f1\b ControlComponent
+\f0\b0  := ComboBox1\
+			- Aggiungere una 
+\f1\b Format
+\f0\b0  
+\f1\b Expression
+\f0\b0 \
+				- 
+\f1\b ControlExpression
+\f0\b0  := Text\
+				- 
+\f1\b SourceExpression
+\f0\b0  := UpperCase(FirstName.AsString + \'91 \'91 + LastName.AsString + \'91 - \'92 + EmployeeID.AsString)\
+	- 
+\f1\b TBindGridList
+\f0\b0 :\
+		- Aggiungiamo ancora un p\'f2 pi\'f9 di complessit\'e0\
+		- Quando cominciamo ad avere a che fare con le 
+\f1\b TStringGrid
+\f0\b0  o altri tipi di griglie il gioco comincia a farsi pi\'f9 articolato\
+		- Una StringGrid \'e8 una lista di liste di stringhe giusto?\
+		- La 
+\f1\b TBindGridList
+\f0\b0  \'e8 fatta proprio apposta per questo tipo di componenti e di solito necessit\'e0 di molte pi\'f9 espressioni per funzionare correttamente\
+		- Dopo la sua creazione presenta 
+\f1\b 3 expression Collection:
+\f0\b0 \
+			- 
+\f1\b FormatControl
+\f0\b0 : collezione di expressioni per inizializzare il ControlComponent all\'92attivazione\
+			- 
+\f1\b ClearControl
+\f0\b0 : collezione di espressioni per finalizzare il ControlComponent alla disattivazione\
+			- 
+\f1\b Columns
+\f0\b0 : collezione di espressioni per impostare il contenuto delle colonne/celle della griglia\
+				- 
+\f1\b Field1
+\f0\b0 :  collezioni di espressioni per impostare il contenuto di una colonna/cella\
+				- Accento sulla propriet\'e0 \'93
+\f1\b SourceMemberName
+\f0\b0 \'94 che collega la colonna ad un campo del BindSourceDB\
+					- 
+\f1\b ColFormat
+\f0\b0 : collezione di espressioni per impostare la colonna nel suo insieme (di solito imposta l\'92header)\
+					- 
+\f1\b CellFormat
+\f0\b0 : collezione di espressioni per impostare il contenuto di una singola cella\
+					- 
+\f1\b Quindi \'93Columns\'94 \'e8 una collezione di collezioni di collezioni di espressioni\
+		
+\f0\b0 - Esempio step 1:\
+			- Creare nuovo progetto VCL\
+			- Aggiungere una TStringGrid\
+			- Aggiungere FDConnection + FDQuery \
+			- Aggiungere TBindSourceDB e collegarlo al DataSet\
+			- Aggiungere TBindingList\
+			- Aggiungere una TBindGridList\
+				- ControlComponent := StringGrid1\
+				- SourceComponent := BindSourceDB1\
+			- Far notare le 3 Expression Collection:\
+				- 
+\f1\b FormatControl
+\f0\b0 : collezione di expressioni per inizializzare il ControlComponent all\'92attivazione\
+				- 
+\f1\b ClearControl
+\f0\b0 : collezione di espressioni per finalizzare il ControlComponent alla disattivazione\
+				- 
+\f1\b Columns
+\f0\b0 : collezione di espressioni per impostare il contenuto delle colonne/celle della griglia\
+					- 
+\f1\b Field1
+\f0\b0 :  collezioni di espressioni per impostare il contenuto di una colonna/cella\
+						- 
+\f1\b ColFormat
+\f0\b0 : collezione di espressioni per impostare la colonna nel suo insieme (di solito imposta l\'92header)\
+						- 
+\f1\b CellFormat
+\f0\b0 : collezione di espressioni per impostare il contenuto di una singola cella\
+						- 
+\f1\b Quindi \'93Columns\'94 \'e8 una collezione di collezioni di collezioni di espressioni\
+			
+\f0\b0 - Aggiungere 4 columns\
+				- Impostare la propriet\'e0 \'93SourceMemberName\'94 per ognuna delle 4 colonne con i nomi dei campi (EmplyeeID, FirstName, LastName, City)\
+				- Impostare la ColFormat con l\'92Header per ogni colonna\
+					- ControlExpression := cells[0,0] (per le altre colonne [1,0], [2,0] ecc.)
+\f1\b \
+
+\f0\b0 					- SourceExpression := \'91ID\'92 (\'91Nome\'92, \'91Cognome\'92, \'91Citt\'e0\'92)\
+				- Impostare la CellFormat con i valori delle celle (per ogni colonna)\
+					- ControlExpression := cells[0]  (NB: Solo un indice, spiegare il perch\'e8)\
+					- SourceExpression := AsString (NB: Viene applicata proprio al campo)\
+			- Attivare il DataSet a DesignTime per far vedere che la griglia si popola (prototipazione)\
+			- Run, far vedere che ovviamente funziona anche a RunTime\
+		- Esempio step 2:\
+			- Far notare che tutte le colonne hanno la stessa larghezza (64 pixel)\
+			- Aggiungere una expression alla FormatControl collection\
+				- ControlExpression := ColWidths[0]  (campo ID)\
+				- SourceExpression := 25\
+			- Disattiva/Riattiva il DataSet e vedere che la colonna ID ora \'e8 pi\'f9 stretta delle altre\
+			- Run\
+		- Esempio step 3:\
+			- Far notare che ci sono pi\'f9 colonne e alcune non ci servono\
+			- Aggiungere una expression alla FormatControl collection\
+				- ControlExpression := ColCount\
+				- SourceExpression := 4\
+			- Disattiva/Riattiva il DataSet per effetto a runtime\
+			- Run\
+		- Esempio step 4:\
+			- Aggiungiamo l\'92attivazione/disattivazione (questa volta con una Action)\
+			- Aggiungere una expression alla FormatControl collection\
+				- ControlExpression := Visible\
+				- SourceExpression := True\
+			- Aggiungere una expression alla ClearControl collection\
+				- ControlExpression := Visible\
+				- SourceExpression := False\
+			- Aggiungere TActionList\
+			- Aggiungere una Action \'93acEnableDisable\'94					- OnExecute:   EmployeeTable.Active := not EmployeeTable.Active;\
+			- Aggiungiamo un TButton\
+				- Colleghiamo il TButton con la Action\
+			- Run\
+		- Esempio step 5: (Side Effects)\
+			- Far notare che la captino del Button non ci piace\
+			- Aggiungere anche un TMainMenu\
+				- Aggiungere Menu \'93File\'94\
+				- Aggiungere MenuItem Sotto \'93File\'94\
+					- Assegnare Action\
+			- Aggiungere una expression a FormatControl\
+				- ControlExpression := Owner.acEnableDisable.Caption\
+				- SourceExpression := \'91Disable\'92\
+			- Aggiungere una expression a ClearControl\
+				- ControlExpression := Owner.acEnableDisable.Caption\
+				- SourceExpression := \'91Enable\'92\
+			- Run\
+		- Esempio step 6:\
+			- Abbiamo detto che questo tipo di LiveBindings (ListLiveBindings) sono monodirezionali\
+				- Non posso inserire o modificare valori\
+				- Griglia e DataSet non rimangono sincronizzati (posizione)			- Aggiungere un TBindNavigator\
+				- DataSource := BindSourceDB1\
+			- Aggiungere una TStatusBar\
+				- SimplePanel := True\
+			- Aggiungere una TBindExpression\
+				- ControlComponent := StatusBar1\
+				- SourceComponent := EmployeesTable\
+				- ControlExpression := SimpleText\
+				- SourceExpression := Format(\'91Record %d of %d\'92, RecNo, RecordCount)\
+			- Far notare che se cerco di muovermi tra i record  NON CAMBIA la riga corrente nella StringGrid\
+			- Aggiungere una TBindExpression\
+				- ControlComponent := StringGrid1\
+				- SourceComponent := EmployeesTable\
+				- ControlExpression := Row\
+				- SourceExpression := RecNo\
+			- Aggiungere \'93OnAfterScroll\'94 sul DataSet\
+				- OnAfterScroll: BindingList1.Notify(DataSet, \'91RecNo\'92);\
+			- Run\
+			- Far notare che se scorro il DataSet con il Navigator ora la griglia si sposta\
+			- Se mi sposto sulla griglia il DataSet non si sposta (\'e8 a senso unico)\
+						\
+\
+- 
+\f1\b Quick Bindings:
+\f0\b0 \
+	- Sono l\'92incapsulamento di tutte quelle espressioni che scriveremmo nel 95% dei casi\
+	- Il pi\'f9 della volte si collegano:\
+		- un campo di una sorgente dati a un componente e viceversa (Edit, ComboBox, LIstBox, Grids\'85)\
+		- una propriet\'e0 di un oggetto a un componente e viceversa (Edit, ComboBox, LIstBox, Grids\'85)\
+		- un componente a un altro componente\
+	- In questi casi utilizzer\'f2 i QuickBindings\
+	- Negli altri casi eccezionali (5%) user\'f2 componenti di pi\'f9 basso livello e scrivere manualmente le espressioni\
+\
+\
+\
+\
+			\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+- Utilizzare LiveBindings con i componenti di alto livello\
+	- Esempio \'93
+\f1\b BindExpressionSimple1
+\f0\b0 \'94 (nuovo progetto VCL)\
+		1) Mettere una TToolBar e impostare la sua propriet\'e0 \'93SimplePanel\'94 := true\
+		2) Mettere manualmente una TBindingList\
+		3) Aggiungere una TBindExpression (non confondere con TBindingExpression di prima)\
+		4) Impostare la propriet\'e0 \'93ControlComponent\'94 = StatusBar1\
+		5) \'93SourceComponent\'94 = Form1\
+		6) \'93ControlExpression\'94 = \'93SimpleText\'94\
+		7) \'93SourceExpression\'94 = \'93ClassName() + \'91 Width: \'91 + ToStr(Width) + \'91, Height: \'91 + ToStr(Height)\'94\
+		- Far vedere che si visualizzano le dimensioni iniziali ma poi quando si ridimensiona la form i valori non cambiano\
+		8) Aggiungere event handler \'93OnResize\'94 della form: BindingList1.Notify(Sender, \'91\'92);\
+		- Ora i valori si aggiornano quando si ridimensiona la form\
+		- Cosa c\'92\'e8 di diverso rispetto agli esempi precedenti?\
+			- TBindingList: mantiene su una form/frame una collezione di BindExpressions\
+			- Nonostante il tutto si basi su quanto detto prima sulle BindingExpression di solito non si usano queste direttamente ma si utilizzano delle \'93LiveBindings\'94 che sono ad un livello un p\'f2 pi\'f9 alto, ce ne sono diverse, ognuna specializzata nel semplificarci la vita in un determinato contesto. Ci rendono pi\'f9 agevole Binding che sarebbero altrimenti piuttosto articolati e complessi (es. ListView, Griglie ecc.)\
+			- Ogni \'93LiveBinding\'94 in pratica fornisce visibilit\'e0 (IScope) tra i componenti e l\'92ExpressionEngine automatizzando e quindi semplificando alcuni passaggi che altrimenti dovremo impostare manualmente.\
+			- La pi\'f9 semplice delle LiveBindings \'e8 la 
+\f1\b TBindExpression
+\f0\b0 \
+		- Di solito c\'92\'e8 un ControlComponent (cio\'e8 l\'92oggetto destinatario del valore risultato dell\'92espressione) e anche un SourceComponent (che fornisce il valore di partenza dell\'92espressione)\
+		- Entrambi gli oggetti (Control e Source) sono automaticamente aggiunti agli scope dell\'92espressione (IScope)\
+		- Di solito ogni \'93LiveBinding\'94 ha quattro propriet\'e0 principali (TBindExpression):\
+			- 
+\f1\b ControlComponent
+\f0\b0 : Il componente a cui il LiveBinding \'e8 associato e di solito \'e8 il destinatario del risultato dell\'92espressione\
+			- 
+\f1\b ControlExpression
+\f0\b0 /s: Di solito indica il nome della propriet\'e0 (del ControlComponent) alla quale verr\'e0 assegnato il risultato dell\'92espressione\
+			- 
+\f1\b SourceComponent
+\f0\b0 : E\'92 il componente che mette a disposizione i valori delle proprie propriet\'e0 per la valutazione dell\'92espressione\
+			- 
+\f1\b SourceExpression
+\f0\b0 /s: E\'92 l\'92espressione da applicare al SourceComponent e che usa le sue propriet\'e0 (normalmente il nome della propriet\'e0 che si vuole poi assegnare al ControlComponent)\
+	- Esempio \'93\
+\
+\
+\
+\
+\
+		  \
+\
+}

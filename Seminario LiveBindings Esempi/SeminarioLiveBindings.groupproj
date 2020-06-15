@@ -1,0 +1,156 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{2B5DE905-3740-44EE-859A-3C59D96B4B7C}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="01_TBindingExpression\TBindingExpression_01.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="02_TBindExpression_TBindExprItems\TBindExpression_TBindExprItems_02.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="03_CustomConverters\CustomConverters_03.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="04_ListLiveBindings\BindList_04.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="05_BindGridList\BindGriList_05.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="06_LinkLiveBinding\LinkLiveBindings_06.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="07_QuickBindings\QuickBindings_07.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="08_CustomFormat_LookupCombo\CustomFormat_LookupCombo_08.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="09_PrototypeBindSource_MasterDetail\PrototypeBindSource_MasterDetail_09.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="PizzaOrders\PizzaOrders.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="PhoneContacts_ioProtypeBindSource\PhoneContacts_ioPrototypeBindSource.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="TBindingExpression_01">
+        <MSBuild Projects="01_TBindingExpression\TBindingExpression_01.dproj"/>
+    </Target>
+    <Target Name="TBindingExpression_01:Clean">
+        <MSBuild Projects="01_TBindingExpression\TBindingExpression_01.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="TBindingExpression_01:Make">
+        <MSBuild Projects="01_TBindingExpression\TBindingExpression_01.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="TBindExpression_TBindExprItems_02">
+        <MSBuild Projects="02_TBindExpression_TBindExprItems\TBindExpression_TBindExprItems_02.dproj"/>
+    </Target>
+    <Target Name="TBindExpression_TBindExprItems_02:Clean">
+        <MSBuild Projects="02_TBindExpression_TBindExprItems\TBindExpression_TBindExprItems_02.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="TBindExpression_TBindExprItems_02:Make">
+        <MSBuild Projects="02_TBindExpression_TBindExprItems\TBindExpression_TBindExprItems_02.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="CustomConverters_03">
+        <MSBuild Projects="03_CustomConverters\CustomConverters_03.dproj"/>
+    </Target>
+    <Target Name="CustomConverters_03:Clean">
+        <MSBuild Projects="03_CustomConverters\CustomConverters_03.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="CustomConverters_03:Make">
+        <MSBuild Projects="03_CustomConverters\CustomConverters_03.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="BindList_04">
+        <MSBuild Projects="04_ListLiveBindings\BindList_04.dproj"/>
+    </Target>
+    <Target Name="BindList_04:Clean">
+        <MSBuild Projects="04_ListLiveBindings\BindList_04.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="BindList_04:Make">
+        <MSBuild Projects="04_ListLiveBindings\BindList_04.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="BindGriList_05">
+        <MSBuild Projects="05_BindGridList\BindGriList_05.dproj"/>
+    </Target>
+    <Target Name="BindGriList_05:Clean">
+        <MSBuild Projects="05_BindGridList\BindGriList_05.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="BindGriList_05:Make">
+        <MSBuild Projects="05_BindGridList\BindGriList_05.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="LinkLiveBindings_06">
+        <MSBuild Projects="06_LinkLiveBinding\LinkLiveBindings_06.dproj"/>
+    </Target>
+    <Target Name="LinkLiveBindings_06:Clean">
+        <MSBuild Projects="06_LinkLiveBinding\LinkLiveBindings_06.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="LinkLiveBindings_06:Make">
+        <MSBuild Projects="06_LinkLiveBinding\LinkLiveBindings_06.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="QuickBindings_07">
+        <MSBuild Projects="07_QuickBindings\QuickBindings_07.dproj"/>
+    </Target>
+    <Target Name="QuickBindings_07:Clean">
+        <MSBuild Projects="07_QuickBindings\QuickBindings_07.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="QuickBindings_07:Make">
+        <MSBuild Projects="07_QuickBindings\QuickBindings_07.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="CustomFormat_LookupCombo_08">
+        <MSBuild Projects="08_CustomFormat_LookupCombo\CustomFormat_LookupCombo_08.dproj"/>
+    </Target>
+    <Target Name="CustomFormat_LookupCombo_08:Clean">
+        <MSBuild Projects="08_CustomFormat_LookupCombo\CustomFormat_LookupCombo_08.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="CustomFormat_LookupCombo_08:Make">
+        <MSBuild Projects="08_CustomFormat_LookupCombo\CustomFormat_LookupCombo_08.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="PrototypeBindSource_MasterDetail_09">
+        <MSBuild Projects="09_PrototypeBindSource_MasterDetail\PrototypeBindSource_MasterDetail_09.dproj"/>
+    </Target>
+    <Target Name="PrototypeBindSource_MasterDetail_09:Clean">
+        <MSBuild Projects="09_PrototypeBindSource_MasterDetail\PrototypeBindSource_MasterDetail_09.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="PrototypeBindSource_MasterDetail_09:Make">
+        <MSBuild Projects="09_PrototypeBindSource_MasterDetail\PrototypeBindSource_MasterDetail_09.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="PizzaOrders">
+        <MSBuild Projects="PizzaOrders\PizzaOrders.dproj"/>
+    </Target>
+    <Target Name="PizzaOrders:Clean">
+        <MSBuild Projects="PizzaOrders\PizzaOrders.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="PizzaOrders:Make">
+        <MSBuild Projects="PizzaOrders\PizzaOrders.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="PhoneContacts_ioPrototypeBindSource">
+        <MSBuild Projects="PhoneContacts_ioProtypeBindSource\PhoneContacts_ioPrototypeBindSource.dproj"/>
+    </Target>
+    <Target Name="PhoneContacts_ioPrototypeBindSource:Clean">
+        <MSBuild Projects="PhoneContacts_ioProtypeBindSource\PhoneContacts_ioPrototypeBindSource.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="PhoneContacts_ioPrototypeBindSource:Make">
+        <MSBuild Projects="PhoneContacts_ioProtypeBindSource\PhoneContacts_ioPrototypeBindSource.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="TBindingExpression_01;TBindExpression_TBindExprItems_02;CustomConverters_03;BindList_04;BindGriList_05;LinkLiveBindings_06;QuickBindings_07;CustomFormat_LookupCombo_08;PrototypeBindSource_MasterDetail_09;PizzaOrders;PhoneContacts_ioPrototypeBindSource"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="TBindingExpression_01:Clean;TBindExpression_TBindExprItems_02:Clean;CustomConverters_03:Clean;BindList_04:Clean;BindGriList_05:Clean;LinkLiveBindings_06:Clean;QuickBindings_07:Clean;CustomFormat_LookupCombo_08:Clean;PrototypeBindSource_MasterDetail_09:Clean;PizzaOrders:Clean;PhoneContacts_ioPrototypeBindSource:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="TBindingExpression_01:Make;TBindExpression_TBindExprItems_02:Make;CustomConverters_03:Make;BindList_04:Make;BindGriList_05:Make;LinkLiveBindings_06:Make;QuickBindings_07:Make;CustomFormat_LookupCombo_08:Make;PrototypeBindSource_MasterDetail_09:Make;PizzaOrders:Make;PhoneContacts_ioPrototypeBindSource:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

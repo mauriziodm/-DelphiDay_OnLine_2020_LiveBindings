@@ -1,0 +1,60 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{7D298E27-4FCC-49B9-879E-A7B4699FFB39}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="TBindExpression_SimpleFMX_Managed.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\5_BindGridList\BindGriList.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\6_LinkLiveBinding\LinkLiveBindings.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="TBindExpression_SimpleFMX_Managed">
+        <MSBuild Projects="TBindExpression_SimpleFMX_Managed.dproj"/>
+    </Target>
+    <Target Name="TBindExpression_SimpleFMX_Managed:Clean">
+        <MSBuild Projects="TBindExpression_SimpleFMX_Managed.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="TBindExpression_SimpleFMX_Managed:Make">
+        <MSBuild Projects="TBindExpression_SimpleFMX_Managed.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="BindGriList">
+        <MSBuild Projects="..\5_BindGridList\BindGriList.dproj"/>
+    </Target>
+    <Target Name="BindGriList:Clean">
+        <MSBuild Projects="..\5_BindGridList\BindGriList.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="BindGriList:Make">
+        <MSBuild Projects="..\5_BindGridList\BindGriList.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="LinkLiveBindings">
+        <MSBuild Projects="..\6_LinkLiveBinding\LinkLiveBindings.dproj"/>
+    </Target>
+    <Target Name="LinkLiveBindings:Clean">
+        <MSBuild Projects="..\6_LinkLiveBinding\LinkLiveBindings.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="LinkLiveBindings:Make">
+        <MSBuild Projects="..\6_LinkLiveBinding\LinkLiveBindings.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="TBindExpression_SimpleFMX_Managed;BindGriList;LinkLiveBindings"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="TBindExpression_SimpleFMX_Managed:Clean;BindGriList:Clean;LinkLiveBindings:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="TBindExpression_SimpleFMX_Managed:Make;BindGriList:Make;LinkLiveBindings:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

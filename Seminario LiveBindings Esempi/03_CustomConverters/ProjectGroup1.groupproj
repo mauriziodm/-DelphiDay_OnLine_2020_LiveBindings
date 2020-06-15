@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{61B5E722-F130-4F32-81B2-E5F194EE61EE}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="CustomConverters.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\01_TBindingExpression\TBindingExpression_01.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="CustomConverters">
+        <MSBuild Projects="CustomConverters.dproj"/>
+    </Target>
+    <Target Name="CustomConverters:Clean">
+        <MSBuild Projects="CustomConverters.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="CustomConverters:Make">
+        <MSBuild Projects="CustomConverters.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="TBindingExpression_01">
+        <MSBuild Projects="..\01_TBindingExpression\TBindingExpression_01.dproj"/>
+    </Target>
+    <Target Name="TBindingExpression_01:Clean">
+        <MSBuild Projects="..\01_TBindingExpression\TBindingExpression_01.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="TBindingExpression_01:Make">
+        <MSBuild Projects="..\01_TBindingExpression\TBindingExpression_01.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="CustomConverters;TBindingExpression_01"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="CustomConverters:Clean;TBindingExpression_01:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="CustomConverters:Make;TBindingExpression_01:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

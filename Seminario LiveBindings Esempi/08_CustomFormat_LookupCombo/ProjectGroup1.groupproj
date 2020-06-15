@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{FE68005C-895E-41D0-9EAE-C4EE28270A53}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="LookupCombo.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\01_TBindingExpression\TBindingExpression_01.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="LookupCombo">
+        <MSBuild Projects="LookupCombo.dproj"/>
+    </Target>
+    <Target Name="LookupCombo:Clean">
+        <MSBuild Projects="LookupCombo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="LookupCombo:Make">
+        <MSBuild Projects="LookupCombo.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="TBindingExpression_01">
+        <MSBuild Projects="..\01_TBindingExpression\TBindingExpression_01.dproj"/>
+    </Target>
+    <Target Name="TBindingExpression_01:Clean">
+        <MSBuild Projects="..\01_TBindingExpression\TBindingExpression_01.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="TBindingExpression_01:Make">
+        <MSBuild Projects="..\01_TBindingExpression\TBindingExpression_01.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="LookupCombo;TBindingExpression_01"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="LookupCombo:Clean;TBindingExpression_01:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="LookupCombo:Make;TBindingExpression_01:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

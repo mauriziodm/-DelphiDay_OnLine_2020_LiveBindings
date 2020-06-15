@@ -1,0 +1,72 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{E3E13462-7E6B-4A9A-8D4E-9B4ED5DC2BF8}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="ListLiveBindings.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\5_BindGridList\BindGriList.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\3_TBindExpression\TBindExpression.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\2bis_TBindExpression_SimpleFMX_Unmanaged\TBindExpression_SimpleFMX_Unmanaged.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ListLiveBindings">
+        <MSBuild Projects="ListLiveBindings.dproj"/>
+    </Target>
+    <Target Name="ListLiveBindings:Clean">
+        <MSBuild Projects="ListLiveBindings.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ListLiveBindings:Make">
+        <MSBuild Projects="ListLiveBindings.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="BindGriList">
+        <MSBuild Projects="..\5_BindGridList\BindGriList.dproj"/>
+    </Target>
+    <Target Name="BindGriList:Clean">
+        <MSBuild Projects="..\5_BindGridList\BindGriList.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="BindGriList:Make">
+        <MSBuild Projects="..\5_BindGridList\BindGriList.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="TBindExpression">
+        <MSBuild Projects="..\3_TBindExpression\TBindExpression.dproj"/>
+    </Target>
+    <Target Name="TBindExpression:Clean">
+        <MSBuild Projects="..\3_TBindExpression\TBindExpression.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="TBindExpression:Make">
+        <MSBuild Projects="..\3_TBindExpression\TBindExpression.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="TBindExpression_SimpleFMX_Unmanaged">
+        <MSBuild Projects="..\2bis_TBindExpression_SimpleFMX_Unmanaged\TBindExpression_SimpleFMX_Unmanaged.dproj"/>
+    </Target>
+    <Target Name="TBindExpression_SimpleFMX_Unmanaged:Clean">
+        <MSBuild Projects="..\2bis_TBindExpression_SimpleFMX_Unmanaged\TBindExpression_SimpleFMX_Unmanaged.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="TBindExpression_SimpleFMX_Unmanaged:Make">
+        <MSBuild Projects="..\2bis_TBindExpression_SimpleFMX_Unmanaged\TBindExpression_SimpleFMX_Unmanaged.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ListLiveBindings;BindGriList;TBindExpression;TBindExpression_SimpleFMX_Unmanaged"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ListLiveBindings:Clean;BindGriList:Clean;TBindExpression:Clean;TBindExpression_SimpleFMX_Unmanaged:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ListLiveBindings:Make;BindGriList:Make;TBindExpression:Make;TBindExpression_SimpleFMX_Unmanaged:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

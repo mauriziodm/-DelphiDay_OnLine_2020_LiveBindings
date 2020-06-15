@@ -1,0 +1,141 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 389
+  ClientWidth = 445
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object Label1: TLabel
+    StyledSettings = [Family, Style, FontColor]
+    Position.X = 88.000000000000000000
+    Position.Y = 80.000000000000000000
+    Size.Width = 249.000000000000000000
+    Size.Height = 57.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Size = 36.000000000000000000
+    TextSettings.HorzAlign = Center
+    Text = 'LiveBindings'
+    TabOrder = 0
+  end
+  object TrackBar1: TTrackBar
+    CanParentFocus = True
+    Orientation = Horizontal
+    Position.X = 96.000000000000000000
+    Position.Y = 216.000000000000000000
+    Size.Width = 241.000000000000000000
+    Size.Height = 19.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    OnChange = TrackBar1Change
+  end
+  object ProgressBar1: TProgressBar
+    Orientation = Horizontal
+    Position.X = 96.000000000000000000
+    Position.Y = 248.000000000000000000
+    Size.Width = 241.000000000000000000
+    Size.Height = 20.000000000000000000
+    Size.PlatformDefault = False
+  end
+  object Edit1: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 6
+    Text = 'Edit1'
+    TextSettings.Font.Size = 24.000000000000000000
+    TextSettings.Font.StyleExt = {00070000000000000004000000}
+    Position.X = 96.000000000000000000
+    Position.Y = 280.000000000000000000
+    Size.Width = 193.000000000000000000
+    Size.Height = 41.000000000000000000
+    Size.PlatformDefault = False
+    StyledSettings = [Family, FontColor]
+    OnChange = TrackBar1Change
+  end
+  object CheckBox1: TCheckBox
+    IsChecked = True
+    Position.X = 304.000000000000000000
+    Position.Y = 288.000000000000000000
+    TabOrder = 7
+    Text = 'CheckBox1'
+    OnChange = TrackBar1Change
+  end
+  object Edit2: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 5
+    Text = 'Edit2'
+    TextSettings.Font.Size = 24.000000000000000000
+    TextSettings.Font.StyleExt = {00070000000000000004000000}
+    Position.X = 96.000000000000000000
+    Position.Y = 328.000000000000000000
+    Size.Width = 193.000000000000000000
+    Size.Height = 41.000000000000000000
+    Size.PlatformDefault = False
+    StyledSettings = [Family, FontColor]
+    OnChange = TrackBar1Change
+  end
+  object BindingsList1: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 20
+    Top = 5
+    object BindExpression1: TBindExpression
+      Category = 'Binding Expressions'
+      ControlComponent = Label1
+      SourceComponent = TrackBar1
+      SourceExpression = 'Value'
+      ControlExpression = 'RotationAngle'
+      NotifyOutputs = False
+      Direction = dirSourceToControl
+    end
+    object BindExpression2: TBindExpression
+      Category = 'Binding Expressions'
+      ControlComponent = ProgressBar1
+      SourceComponent = TrackBar1
+      SourceExpression = 'Value'
+      ControlExpression = 'Value'
+      NotifyOutputs = False
+      Direction = dirSourceToControl
+    end
+    object BindExprItems1: TBindExprItems
+      Category = 'Binding Expressions'
+      ControlComponent = Edit1
+      SourceComponent = TrackBar1
+      FormatExpressions = <
+        item
+          ControlExpression = 'Text'
+          SourceExpression = #39'Rotation: '#39' + Round(Value) + '#39#176#39
+        end
+        item
+          ControlExpression = 'DigitsOnly(Text)'
+          SourceExpression = 'Value'
+          Direction = dirControlToSource
+        end>
+      ClearExpressions = <
+        item
+          ControlExpression = 'Text'
+          SourceExpression = #39'Disabled'#39
+        end>
+      NotifyOutputs = False
+    end
+    object BindExpression3: TBindExpression
+      Category = 'Binding Expressions'
+      ControlComponent = BindExprItems1
+      SourceComponent = CheckBox1
+      SourceExpression = 'IsChecked'
+      ControlExpression = 'Active'
+      NotifyOutputs = False
+      Direction = dirSourceToControl
+    end
+    object BindExpression4: TBindExpression
+      Category = 'Binding Expressions'
+      ControlComponent = Edit2
+      SourceComponent = Edit1
+      SourceExpression = 'Text'
+      ControlExpression = 'Text'
+      NotifyOutputs = False
+      Direction = dirBidirectional
+    end
+  end
+end

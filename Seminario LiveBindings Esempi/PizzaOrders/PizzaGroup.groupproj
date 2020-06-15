@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{CD1FF416-A26F-4BA6-A6F4-9407029217D0}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="PizzaOrders.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="C:\delphi\tools\iORM\Packages\Delphi\iORM_Project.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="PizzaOrders">
+        <MSBuild Projects="PizzaOrders.dproj"/>
+    </Target>
+    <Target Name="PizzaOrders:Clean">
+        <MSBuild Projects="PizzaOrders.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="PizzaOrders:Make">
+        <MSBuild Projects="PizzaOrders.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="iORM_Project">
+        <MSBuild Projects="C:\delphi\tools\iORM\Packages\Delphi\iORM_Project.dproj"/>
+    </Target>
+    <Target Name="iORM_Project:Clean">
+        <MSBuild Projects="C:\delphi\tools\iORM\Packages\Delphi\iORM_Project.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="iORM_Project:Make">
+        <MSBuild Projects="C:\delphi\tools\iORM\Packages\Delphi\iORM_Project.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="PizzaOrders;iORM_Project"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="PizzaOrders:Clean;iORM_Project:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="PizzaOrders:Make;iORM_Project:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
